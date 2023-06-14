@@ -12,9 +12,10 @@ class ThreadsafeQueue(asyncio.Queue):
     A wrapper of asyncio.Queue that allows its .get and .put methods to be safely
     called/awaited within the same event loop, or another event loop
     """
-    def __init__(self, maxsize=0):
+    def __init__(self, maxsize=0, *, loop=None):
         # deliberately crash out if not being executed within a live event loop
-        loop = asyncio.get_running_loop()
+        if loop is None:
+            loop = asyncio.get_running_loop()
 
         # ok to proceed
         super().__init__(maxsize=maxsize)
