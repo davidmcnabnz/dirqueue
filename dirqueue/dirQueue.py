@@ -33,6 +33,7 @@ if USE_UVLOOP:
 import aiofiles
 from asyncinotify import Inotify, Event, Mask
 
+# this import seems to fail
 from .threadSafeQueue import ThreadsafeQueue
 
 DEBUG = False
